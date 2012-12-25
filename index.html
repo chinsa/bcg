@@ -1,0 +1,472 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> 
+<html> <!--<![endif]-->
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width">
+		<title>BCG inscription</title>	
+		
+		<script type="text/javascript" src="./js/vendor/jquery-1.8.3.min.js"></script>
+		<script src="./js/vendor/jquery.form.js"></script> 
+		<script type="text/javascript" src="./js/vendor/bootstrap.min.js"></script>
+		<script src="./js/vendor/jquery.validate.min.js"></script>
+		<script src="./js/vendor/messages_fr.js"></script>
+	    <script src="./js/script.js"></script>
+	    <script src="./js/vendor/modernizr-2.6.2.min.js"></script>
+	    <script src="./js/vendor/bootstrap-datepicker.js"></script>
+	    <script src="./js/vendor/bootstrap-select.js"></script>
+	     
+	    <link rel="stylesheet" href="css/datepicker.css">
+        <link rel="stylesheet" href="css/normalize.css">
+        <link rel="stylesheet" href="css/main.css">
+        <link rel="stylesheet" type="text/css" href="./css/style.css">	        
+        
+        <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->        
+        <script type="text/javascript">
+	        $(document).ready(function() {	
+
+				loadCompetenceSelectList('competences1');
+				loadCompetenceSelectList('competences2');
+				loadCompetenceSelectList('competences3');
+				
+				inscrit_id = 0;
+				
+				var options = { 
+					// target:        '#output',   // target element(s) to be updated with server response 
+					beforeSubmit:  showRequest,  // pre-submit callback 
+					success:   showInscritId,  // post-submit callback 
+			 
+					// other available options: 
+					url:       './php/save_inscrit.php',         // override for form's 'action' attribute 
+					type:      'post',       // 'get' or 'post', override for form's 'method' attribute 
+					dataType:  'json',        // 'xml', 'script', or 'json' (expected server response type) 
+					//clearForm: true        // clear all form fields after successful submit 
+					//resetForm: true        // reset the form after successful submit 
+			 
+					// $.ajax options can be used here too, for example: 
+					//timeout:   3000 
+				}; 
+			 
+				// bind to the form's submit event 
+				$('#register-form').ajaxForm(options); 			
+			
+
+				//datepicker
+				$('#naissance').datepicker({
+					format:'yyyy-mm-dd'
+					//format:'dd-mm-yyyy'
+				});
+				
+				//selectpicker
+				$('.selectpicker').selectpicker();
+				
+			});
+			
+			function showRequest(formData, jqForm, options) { 
+			    // formData is an array; here we use $.param to convert it to a string to display it 
+			    // but the form plugin does this for you automatically when it submits the data 
+			    var queryString = $.param(formData); 				 
+			    // jqForm is a jQuery object encapsulating the form element.  To access the 
+			    // DOM element for the form do this: 
+			    // var formElement = jqForm[0]; 
+			    //alert('About to submit: \n\n' + queryString); 
+			 
+			    // here we could return false to prevent the form from being submitted; 
+			    // returning anything other than false will allow the form submit to continue 
+			    return true; 
+			};
+			
+			function showInscritId(data) { 
+				// 'data' is the json object returned from the server 	
+				inscrit_id = data.id;
+				if(data.success == true){
+					//alert("success:"+data.success + ";id:" + inscrit_id+ ";age:" + data.age);
+					alert("Votre inscription a bien été prise en compte. Merci et à bientôt."); 
+					window.location.replace("./about.html");
+					//$('#fields2').show();
+					//$('#save_inscrit_btn').html('Terminer l\'inscription: '+ inscrit_id);
+				}else {
+					//window.location.replace("./about.html");
+					alert("Un petit souci nous a empêché de traiter votre inscription. Vous pouvez nous contacter par courrier à l'adresse ci-dessus. Merci.");
+				}
+			};
+
+			function loadCompetenceSelectList(selectId) {
+				var selectListOptions = {
+					nothing : '------',
+					compta : 'compta',
+					juge_arbitre : 'juge arbitre',
+					infographie : 'infographie',
+					web_developpement:'web developpement',
+					administration_SQL:'administration SQL',
+					formateur_badminton:'formateur badminton',
+					gestion_associative:'gestion associative'
+				};										
+				var select = document.getElementById(selectId);
+				for (index in selectListOptions) {
+					select.options[select.options.length] = new Option(selectListOptions[index], index);
+				}
+			};
+		</script>
+    </head>
+    <body>
+        <!--[if lt IE 7]>
+            <p class="chromeframe">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">activate Google Chrome Frame</a> to improve your experience.</p>
+        <![endif]-->
+
+        <div class="navbar navbar-fixed-top">
+		  <div class="navbar-inner">
+			<div class="container">		  
+			  <div class="nav-collapse">			  	
+			  	<ul class="nav">
+			  		<li class=""><a href="http://bcg38.org/"><i class="icon-home">&nbsp;</i> BCG38</a></li>
+					<li class=""><a href="./index.html"><i class="icon-pencil">&nbsp;</i> Page inscription</a></li>
+					<li class=""><a href="http://www.ffbad.org/"><i class="icon-th-list">&nbsp;</i> FFBad Site</a></li>
+					<li class=""><a href="http://www.badminton-web.fr/"><i class="icon-tags">&nbsp;</i> Ressources</a></li>			
+					<li class=""><a href="./about.html"><i class="icon-envelope">&nbsp;</i> Contact</a></li>
+				</ul>				
+			  </div><!--/.nav-collapse -->
+			</div>
+		  </div>
+		</div>
+		<div class="container">
+			<div id="titleDiv" class="hero-unit">		
+				<h1 id="pageTitle">Badminton   Club <br>&nbsp;&nbsp;<small>de&nbsp;&nbsp;&nbsp;</small>  Grenoble</h1>						
+			</div>
+		</div>		
+			
+		<div class="container">
+			<div class="row">
+				<div class="span12">
+					<div class="well">
+						<form class="form-horizontal" id="register-form">
+							<fieldset>
+								<div id="legend">
+									<h3>Inscrivez-vous <small>* Champs obligatoires</small></h3>
+									<hr>
+								</div>				
+								<div class="control-group">
+									<!-- inscrits_civilite -->
+									<label class="control-label" for="civilite">Civilité * </label>
+									<div class="controls">
+										<div class="input">
+											<select class="selectpicker" name="civilite" id="civilite">
+												<option>M.</option>
+												<option>Mme</option>
+												<option>Mlle</option>								
+											</select>
+										</div>								
+									</div>
+								</div>					
+								<div class="control-group">
+									<!-- inscrits_nom -->
+									<label class="control-label label-large" for="lastName">Nom * </label>
+									<div class="controls">
+										<input type="text" id="lastName" name="lastName" placeholder="" class="input-xlarge">
+									</div>
+								</div>					
+								<div class="control-group">	
+									<!-- inscrits_prenom -->			
+									<label class="control-label" for="firstName">Prenom * </label>
+									<div class="controls">
+										<input type="text" id="firstName" name="firstName" placeholder="" class="input-xlarge">
+									</div>
+								</div>
+								<div class="control-group">
+									<!-- inscrits_email -->
+									<label class="control-label" for="email">Email * </label>
+									<div class="controls">
+										<input type="text" class="input-xlarge" name="email" id="email">
+									</div>
+								</div>														
+								<div class="control-group">
+									<!-- inscrits_adresse_point_remise -->
+									<label class="control-label" for="addressPointRemise">Point de remise </label>
+									<div class="controls">
+										<input type="text" id="addressPointRemise" name="addressPointRemise" class="input-xlarge" placeholder="Etage/Appartement">
+									</div>
+								</div>	
+								<div class="control-group">
+									<!-- inscrits_adresse_localisation -->
+									<label class="control-label" for="localisation">Localisation </label>
+									<div class="controls">
+										<input type="text" id="localisation" name="localisation" class="input-xlarge" placeholder="Bâtiment/Résidence">
+									</div>
+								</div>							
+								<div class="control-group">
+									<!-- inscrits_adresse -->
+									<label class="control-label" for="address">Adresse * </label>
+									<div class="controls">
+										<input type="text" id="address" name="address" class="input-xlarge" placeholder="N° et libellé de voie">
+									</div>
+								</div>		
+								<div class="control-group">
+									<!-- inscrits_boite_postale -->
+									<label class="control-label" for="boitePostale">Lieu-dit,Boîte Postale </label>
+									<div class="controls">
+										<input type="text" id="boitePostale" name="boitePostale" class="input-xlarge" placeholder="">
+									</div>
+								</div>
+								<div class="control-group">
+									<!-- inscrits_postal -->
+									<label class="control-label" for="postal">Code postal * </label>
+									<div class="controls">
+										<input type="text" id="postal" name="postal" class="input-xlarge" placeholder="">
+									</div>
+								</div>
+								<div class="control-group">
+									<!-- inscrits_cedex -->
+									<label class="control-label" for="cedex">Cedex </label>
+									<div class="controls">
+										<input type="text" id="cedex" name="cedex" class="input-xlarge" placeholder="">
+									</div>
+								</div>
+								<div class="control-group">
+									<!-- inscrits_ville -->
+									<label class="control-label" for="city">Ville * </label>
+									<div class="controls">
+										<input type="text" id="city" name="city" class="input-xlarge" placeholder="">
+									</div>
+								</div>
+								<div class="control-group">
+									<!-- inscrits_nationalite -->
+									<label class="control-label" for="nationality">Pays * </label>
+									<div class="controls">
+										<input type="text" id="nationality" name="nationality" class="input-xlarge" placeholder="">
+									</div>
+								</div>
+								<div class="control-group">
+									<!-- inscrits_naissance -->
+									<label class="control-label" for="naissance">Date de naissance * </label>
+									<div class="controls">
+										<input type="text" id="naissance" name="naissance" class="input-xlarge" placeholder="">
+										<span class="add-on"><i class="icon-calendar">&nbsp;</i></span>
+									</div>
+								</div>								
+								<div class="control-group">
+									<!-- inscrits_sexe -->
+									<label class="control-label" for="sex">Sex * </label>
+									<div class="controls">							        	
+					                	<label class="radio inline">
+					                    	<input type="radio" name="sex" id="sex1" value="1" checked> Masculin
+					                  	</label>					               
+					                  	<label class="radio inline">
+					                    	<input type="radio" name="sex" id="sex2" value="0"> Féminin
+					                  	</label>							               
+						            </div>
+								</div>								
+								<div class="control-group">
+									<!-- inscrits_profession -->
+									<label class="control-label" for="profession">Profession </label>
+									<div class="controls">
+										<input type="text" id="profession" name="profession" class="input-xlarge" placeholder="">
+									</div>
+								</div>		
+								<div class="navbar">
+					              <div class="navbar-inner">
+					                <a class="brand" href="#nogo">Compétences utiles pour le club, <small>We need your help ! :)</small></a>
+					              </div>
+					            </div>						
+								<br>		
+								<div class="control-group">
+									<!-- inscrits_competences_predefinis_1 -->
+									<label class="control-label" for="competences1">Compétence 1 </label>
+									<div class="controls">
+										<div class="input">
+											<select class="selectpicker" name="competences1" id="competences1">&nbsp;</select>
+										</div>								
+									</div>
+								</div>	
+								<div class="control-group">
+									<!-- inscrits_competences_predefinis_2 -->
+									<label class="control-label" for="competences2">Compétence 2 </label>
+									<div class="controls">
+										<div class="input">
+											<select class="selectpicker" name="competences2" id="competences2">&nbsp;</select>
+										</div>								
+									</div>
+								</div>	
+								<div class="control-group">
+									<!-- inscrits_competences_predefinis_3 -->
+									<label class="control-label" for="competences3">Compétence 3 </label>
+									<div class="controls">
+										<div class="input">
+											<select class="selectpicker" name="competences3" id="competences3">&nbsp;</select>
+										</div>								
+									</div>
+								</div>	
+								<div class="control-group">
+									<!-- inscrits_competences -->
+									<label class="control-label" for="competences">Autre Compétence </label>
+									<div class="controls">
+										<textarea id="competences" name="competences" class="input-xlarge" rows= "2"></textarea>
+									</div>
+								</div>		
+								<div class="control-group">
+									<!-- inscrits_competences_supp -->
+									<label class="control-label" for="competencesSupp"> </label>
+									<div class="controls">
+							        	<label class="checkbox">
+						                    <input type="checkbox" name="competencesSupp" id="competencesSupp" value="1">Je n'ai pas de compétences particulières mais je veux m'investir dans la vie du club !
+						                </label>							              
+							        </div>									
+								</div>										
+								<hr style="height:2px">
+								<div class="control-group">
+									<!-- inscrits_email_tournois -->
+									<label class="control-label" for="emailTournois"> </label>
+									<div class="controls">
+							        	<label class="checkbox">
+						                    <input type="checkbox" name="emailTournois" id="emailTournois" value="1">Je veux m'inscrire au mailing list <code>Announce Tournois</code>
+						                </label>							              
+							        </div>									
+								</div>	
+								<div class="control-group">
+									<!-- inscrits_email_benevoles -->
+									<label class="control-label" for="emailBenevoles"> </label>
+									<div class="controls">
+							        	<label class="checkbox">
+						                    <input type="checkbox" name="emailBenevoles" id="emailBenevoles" value="1">Je veux m'inscrire au mailing list <code>Benevoles</code>
+						                </label>							              
+							        </div>									
+								</div>
+								<div class="control-group">
+									<!-- inscrits_tel1 -->									
+									<label class="control-label" for="tel1"> Téléphone *</label>
+									<div class="controls">
+										<input type="text" id="tel1" name="tel1" class="input-xlarge" placeholder="">
+									</div>							
+								</div>
+								<div class="control-group">
+									<!-- inscrits_tel2 -->									
+									<label class="control-label" for="tel2"> Tél complémentaire</label>
+									<div class="controls">
+										<input type="text" id="tel2" name="tel2" class="input-xlarge" placeholder="Téléphone complémentaire">
+									</div>							
+								</div>
+								<hr style="height:2px">
+								<div class="control-group">
+									<!-- inscrits_gymnase -->
+									<label class="control-label" for="gymnase">Gymnase * </label>
+									<div class="controls">
+										<div class="input">
+											<select class="selectpicker" name="gymnase" id="gymnase">
+												<option value="europole">Europole</option>
+												<option value="berriat">Chorier Berriat</option>
+											</select>
+										</div>								
+									</div>
+								</div>
+								<div class="control-group">
+									<!-- inscrits_accepte_autre_gymnase -->
+									<label class="control-label" for="accepteOtherGym"> </label>
+									<div class="controls">
+							        	<label class="checkbox">
+						                    <input type="checkbox" name="accepteOtherGym" id="accepteOtherGym" value="1">J'accepte une inscription sur l'autre gymnase si mon premier choix n'est plus disponible.
+						                </label>							              
+							        </div>									
+								</div>
+								<div class="control-group">
+									<!-- inscrits_no_need_magazine -->
+									<label class="control-label" for="noneedBadMag"> </label>
+									<div class="controls">
+							        	<label class="checkbox">
+						                    <input type="checkbox" name="noneedBadMag" id="noneedBadMag" value="1">Je ne suis pas lecteur de « 100% bad » édition papier. Je souhaite me désinscrire de l’abonnement papier « 100% bad » et fais don des 2€ correspondants au club.
+						                </label>							              
+							        </div>									
+								</div>
+								<div class="control-group">
+									<!-- inscrits_insurance -->
+									<label class="control-label" for="insurance">Assurance * </label>
+									<div class="controls">
+										<div class="input">
+											<select class="selectpicker" name="insurance" id="insurance" style="width:400px;">
+												<option value="standard">Formule standard incluse dans la licence FFBad</option>
+												<option value="option1">garanties complémentaires option 1 (surcoût 52,44€)</option>
+												<option value="option2">garanties complémentaires option 2 (surcoût 71,19€)</option>
+												<option value="option3">garanties complémentaires option 3 (surcoût 107,63€)</option>
+											</select>
+										</div>								
+									</div>
+								</div>
+								<div class="control-group">
+									<!-- inscrits_licence -->									
+									<label class="control-label" for="licence"> No de licence</label>
+									<div class="controls">
+										<input type="text" id="licence" name="licence" class="input-xlarge" placeholder="Si vous êtes inscrit l'année derniere">
+									</div>							
+								</div>
+								<div class="control-group">
+									<!-- inscrits_veut_cours -->									
+									<label class="control-label" for="veutCours"> </label>
+									<div class="controls">
+							        	<label class="checkbox">
+						                    <input type="checkbox" name="veutCours" id="veutCours" value="1">Je désire progresser à l'aide d'un cours
+						                </label>							              
+							        </div>								
+								</div>
+								<div class="control-group">
+									<!-- inscrits_veut_interclub -->									
+									<label class="control-label" for="veutInterclub"> </label>
+									<div class="controls">
+							        	<label class="checkbox">
+						                    <input type="checkbox" name="veutInterclub" id="veutInterclub" value="1">Je désire participer à des interclubs
+						                </label>							              
+							        </div>								
+								</div>
+								<div class="control-group">
+									<!-- inscrits_veut_tournoi -->									
+									<label class="control-label" for="veutTournoi"> </label>
+									<div class="controls">
+							        	<label class="checkbox">
+						                    <input type="checkbox" name="veutTournoi" id="veutTournoi" value="1">Je désire participer à des tournois
+						                </label>							              
+							        </div>								
+								</div>
+								<div class="control-group">
+									<!-- inscrits_niveau -->
+									<label class="control-label" for="niveau"> Niveau</label>
+									<div class="controls">
+										<div class="input">
+											<select class="selectpicker" name="niveau" id="niveau">
+												<option value="debutant">Débutant</option>
+												<option value="intermediaire">Intermédiaire</option>
+												<option value="avance">Avancé</option>
+											</select>
+										</div>								
+									</div>
+								</div>
+								<div class="control-group">
+									<!-- inscrits_classement -->									
+									<label class="control-label" for="classment"> Classement</label>
+									<div class="controls">
+										<input type="text" id="classment" name="classment" class="input-xlarge" placeholder="NC(non classés), D1, C2, T50, etc...">
+									</div>									
+								</div>
+								
+								<div class="form-actions" >
+									<button id="save_inscrit_btn" type="submit" class="btn btn-primary btn-large">Enregistrer</button>
+								</div>
+								
+							</fieldset>
+							
+						</form>
+					</div>					
+				</div>
+			</div>
+		</div>
+
+        <!-- Google Analytics: change UA--X to be your site's ID. -->
+        <script>
+           /* var _gaq=[['_setAccount','UA-XXXXX-X'],['_trackPageview']];
+            (function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];
+            g.src=('https:'==location.protocol?'//ssl':'//www')+'.google-analytics.com/ga.js';
+            s.parentNode.insertBefore(g,s)}(document,'script'));*/
+        </script>
+    </body>
+</html>
