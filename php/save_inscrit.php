@@ -86,7 +86,7 @@
 		, '$address', '$boitePostale', '$postal', '$cedex', '$city', '$tel1', '$tel2', '$profession', '$competences1', '$competences2', '$competences3', '$competences', '$competencesSupp', '$veutCours', '$veutInterclub', '$veutTournoi', 
 		$noneedBadMag', '$niveau', '$classment', '$nationality')";*/
 	
-	$sql = "INSERT INTO inscrits (inscrits_civilite, inscrits_prenom, inscrits_nom, inscrits_email, inscrits_date_attente, inscrits_gymnase, inscrits_accepte_autre_gymnase, inscrits_insurance,  
+	$sql = "INSERT INTO inscrits_2013_2014 (inscrits_civilite, inscrits_prenom, inscrits_nom, inscrits_email, inscrits_date_attente, inscrits_gymnase, inscrits_accepte_autre_gymnase, inscrits_insurance,  
 		inscrits_licence, inscrits_email_tournois, inscrits_email_benevoles, inscrits_naissance, inscrits_sexe, inscrits_adresse_point_remise, inscrits_adresse_localisation, inscrits_adresse,inscrits_boite_postale,
 		inscrits_postal,inscrits_cedex,inscrits_ville,inscrits_tel1,inscrits_tel2,inscrits_profession,inscrits_competences_predefinis_1,inscrits_competences_predefinis_2,inscrits_competences_predefinis_3,
 		inscrits_competences,inscrits_competences_supp,inscrits_veut_cours,inscrits_veut_interclub,inscrits_veut_tournoi,inscrits_no_need_magazine,inscrits_niveau,inscrits_classement,inscrits_nationalite) 
@@ -94,6 +94,7 @@
 		'$localisation', '$address', '$boitePostale', '$postal', '$cedex', '$city', '$tel1', '$tel2', '$profession', '$competences1', '$competences2', '$competences3', '$competences', '$competencesSupp', '$veutCours', 
 		'$veutInterclub', '$veutTournoi', '$noneedBadMag', '$niveau', '$classment', '$nationality')";	
 	
+	mysql_query("SET character_set_results = 'utf8', character_set_client = 'utf8', character_set_connection = 'utf8', character_set_database = 'utf8', character_set_server = 'utf8'");
 	$result = @mysql_query($sql);
 	if ($result){
 		echo json_encode(array('success'=>true));
