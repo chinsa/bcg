@@ -24,13 +24,11 @@ $(document).ready(function(){
 	      }, 
 	      postal: {
 	      	minlength: 5,
-	        required: true
+	      	maxlength: 5,
+	        required: true,
+	        number: true
 	      },   
 	      city: {
-	      	minlength: 2,
-	        required: true
-	      }, 
-	      nationality: {
 	      	minlength: 2,
 	        required: true
 	      }, 

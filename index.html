@@ -58,8 +58,8 @@
 
 				//datepicker
 				$('#naissance').datepicker({
-					format:'yyyy-mm-dd'
-					//format:'dd-mm-yyyy'
+					//format:'yyyy-mm-dd'
+					format:'dd-mm-yyyy'
 				});
 				
 				//selectpicker
@@ -235,7 +235,7 @@
 								</div>
 								<div class="control-group">
 									<!-- inscrits_nationalite -->
-									<label class="control-label" for="nationality">Pays * </label>
+									<label class="control-label" for="nationality">Pays </label>
 									<div class="controls">
 										<input type="text" id="nationality" name="nationality" class="input-xlarge" placeholder="">
 									</div>
@@ -246,11 +246,12 @@
 									<div class="controls">
 										<input type="text" id="naissance" name="naissance" class="input-xlarge" placeholder="">
 										<span class="add-on"><i class="icon-calendar">&nbsp;</i></span>
+										<span class="help-block">Format de Date: JJ-MM-AAAA</span>
 									</div>
 								</div>								
 								<div class="control-group">
 									<!-- inscrits_sexe -->
-									<label class="control-label" for="sex">Sex * </label>
+									<label class="control-label" for="sex">Sexe * </label>
 									<div class="controls">							        	
 					                	<label class="radio inline">
 					                    	<input type="radio" name="sex" id="sex1" value="1" checked> Masculin
@@ -322,7 +323,7 @@
 									<label class="control-label" for="emailTournois"> </label>
 									<div class="controls">
 							        	<label class="checkbox">
-						                    <input type="checkbox" name="emailTournois" id="emailTournois" value="1">Je veux m'inscrire au mailing list <code>Announce Tournois</code>
+						                    <input type="checkbox" name="emailTournois" id="emailTournois" value="1">Je veux m'inscrire à la mailing list <code>Announce Tournois</code>
 						                </label>							              
 							        </div>									
 								</div>	
@@ -331,7 +332,7 @@
 									<label class="control-label" for="emailBenevoles"> </label>
 									<div class="controls">
 							        	<label class="checkbox">
-						                    <input type="checkbox" name="emailBenevoles" id="emailBenevoles" value="1">Je veux m'inscrire au mailing list <code>Benevoles</code>
+						                    <input type="checkbox" name="emailBenevoles" id="emailBenevoles" value="1">Je veux m'inscrire à la mailing list <code>Benevoles</code>
 						                </label>							              
 							        </div>									
 								</div>

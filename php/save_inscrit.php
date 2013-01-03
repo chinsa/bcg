@@ -13,7 +13,7 @@
 	$cedex = $_REQUEST['cedex'];
 	$city = $_REQUEST['city'];
 	$nationality = $_REQUEST['nationality'];
-	$naissance = $_REQUEST['naissance'];
+	$naissance = date('Y-m-d', strtotime($_REQUEST['naissance']));
 	$sex = $_REQUEST['sex'];
 	$profession = $_REQUEST['profession'];
 	$competences1 = $_REQUEST['competences1'];
